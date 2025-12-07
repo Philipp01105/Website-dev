@@ -12,7 +12,10 @@
         <h2>Willkommen auf unserem Blog</h2>
         <p>Hier steht alles, was in letzter Zeit passiert ist.</p>
     </section>
-    <section th:each="blog : ${blogs}" class="section">
+    <section th:each="blog : ${blogs}" class="section blog-card">
+        <div th:if="${blog.imageUrl}" class="blog-image">
+            <img th:src="${blog.imageUrl}" th:alt="${blog.title}" style="width: 100%; height: 250px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem;">
+        </div>
         <h2 th:text="${blog.title}"></h2>
         <p th:utext="${blog.content}" style ="white-space: pre-wrap;"></p>
         <small th:text="${#temporals.format(blog.timestamp, 'dd.MM.yyyy')}" class="timestamp"></small>
