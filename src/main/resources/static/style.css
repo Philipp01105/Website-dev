@@ -730,6 +730,36 @@ footer p {
 }
 
 @media (max-width: 768px) {
+    /* Show mobile menu toggle */
+    .mobile-menu-toggle {
+        display: flex;
+    }
+
+    /* Hide desktop navigation */
+    .nav-buttons {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--iris-black);
+        flex-direction: column;
+        padding: 1rem;
+        border-top: 2px solid var(--iris-red);
+        box-shadow: var(--shadow-lg);
+    }
+
+    /* Show mobile menu when active */
+    .nav-buttons.active {
+        display: flex;
+    }
+
+    .nav-buttons .button {
+        width: 100%;
+        justify-content: center;
+        margin: 0.5rem 0;
+    }
+
     .hero-section h1 {
         font-size: 2.5rem;
     }
@@ -753,6 +783,7 @@ footer p {
 
     .nav-container {
         padding: 1rem;
+        position: relative;
     }
 
     .cta-buttons {

@@ -16,6 +16,12 @@ public class Blog implements Timestamped {
     private String title;
     private String content;
     private LocalDateTime timestamp;
+    
+    /**
+     * URL path to the blog post's featured image.
+     * Should be a relative path to static resources (e.g., "/Pictures/image.jpg")
+     * or an absolute URL. Can be null if no image is associated with the blog post.
+     */
     private String imageUrl;
 
     // Getters and setters for all fields
