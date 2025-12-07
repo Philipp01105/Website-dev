@@ -31,6 +31,7 @@ export default defineConfig({
       }
     }
   },
+  base: '/react-build/',
   build: {
     outDir: '../src/main/resources/static/react-build',
     emptyOutDir: true,
