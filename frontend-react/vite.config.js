@@ -13,30 +13,21 @@ export default defineConfig({
   server: {
     port: 3000,
     proxy: {
-      // IMPORTANT: Ensure Spring Boot is running on port 8080
-      // If your Spring Boot runs on a different port (e.g., 8081),
-      // update all target URLs below to match
+      // Proxy API calls to Spring Boot backend
+      // Update the target port if your Spring Boot runs on a different port
       '/api': {
         target: 'http://localhost:8080',
         changeOrigin: true,
       },
-      '/contact': {
-        target: 'http://localhost:8080',
-        changeOrigin: true,
-      },
-      '/login-real': {
-        target: 'http://localhost:8080',
-        changeOrigin: true,
-      },
-      '/Pictures': {
-        target: 'http://localhost:8080',
-        changeOrigin: true,
-      }
     }
   },
-  base: '/react-build/',
+  // Use relative paths for deployment flexibility
+  base: './',
   build: {
-    outDir: '../src/main/resources/static/react-build',
+    // Build output stays in frontend directory for self-contained deployment
+    outDir: 'dist',
     emptyOutDir: true,
+    // Generate source maps for debugging
+    sourcemap: true,
   }
 })

@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import axios from 'axios'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
+import { Card, CardContent } from '../components/ui/card'
 import { Input } from '../components/ui/input'
 import { Textarea } from '../components/ui/textarea'
 import { Button } from '../components/ui/button'
+import { Mail, MessageSquare, Send, CheckCircle, AlertCircle, ExternalLink } from 'lucide-react'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -43,7 +44,6 @@ export default function Contact() {
 
       setSubmitStatus('success')
       setFormData({ name: '', message: '' })
-      alert(`Danke für dein Feedback, ${formData.name}!`)
     } catch (error) {
       console.error('Error submitting form:', error)
       setSubmitStatus('error')
@@ -53,114 +53,174 @@ export default function Contact() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-iris-black dark:to-iris-gray-dark">
-      <div className="container mx-auto px-4 py-12">
-        <div className="max-w-2xl mx-auto">
-          {/* Header */}
-          <div className="mb-12 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-iris-red mb-4">
-              Kontaktiere uns!
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300">
-              Wir freuen uns auf deine Nachricht
-            </p>
+    <div className="min-h-screen bg-gradient-to-b from-iris-black via-iris-gray-dark to-iris-black">
+      {/* Hero Header */}
+      <section className="relative py-32 overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src="/Pictures/polaris_closeup.jpg" 
+            alt="Contact Background" 
+            className="w-full h-full object-cover opacity-20"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-iris-red/30 via-transparent to-iris-red/30" />
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <div className="inline-block p-6 bg-iris-red rounded-full mb-6 shadow-2xl">
+            <Mail className="h-16 w-16 text-white" />
           </div>
+          <h1 className="text-6xl md:text-7xl font-black text-white mb-6 tracking-tight">
+            Kontaktiere <span className="text-iris-red">uns</span>
+          </h1>
+          <p className="text-2xl text-gray-300 max-w-3xl mx-auto">
+            Wir freuen uns auf deine Nachricht und helfen dir gerne weiter
+          </p>
+        </div>
+      </section>
 
-          {/* Info Card */}
-          <Card className="mb-8 border-l-4 border-iris-red">
-            <CardHeader>
-              <CardTitle className="text-iris-red">Informationen:</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription className="text-base">
-                Halte dich an die gleichen Regeln wie auf dem Discord Server. 
-                Falls du eine Beschwerde anonym schicken möchtest, dann gib in "Name" Anonym an.
-              </CardDescription>
-            </CardContent>
-          </Card>
+      <div className="container mx-auto px-4 pb-24 -mt-16 relative z-20">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Contact Methods */}
+            <div className="lg:col-span-1 space-y-6">
+              {/* Discord Card */}
+              <Card className="bg-gradient-to-br from-iris-gray-dark to-iris-black border-iris-red/30 shadow-2xl hover:shadow-iris-red/40 transition-all duration-300 transform hover:-translate-y-1">
+                <CardContent className="p-8 text-white">
+                  <div className="inline-block p-4 bg-iris-red rounded-full mb-4">
+                    <MessageSquare className="h-8 w-8" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-3">Discord</h3>
+                  <p className="text-gray-300 mb-6">
+                    Join unserem Discord Server für direkten Kontakt und Community-Support.
+                  </p>
+                  <a 
+                    href="https://discord.gg/R7befRbN7G" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button variant="outline" className="w-full text-white border-white hover:bg-white hover:text-iris-black">
+                      Discord beitreten <ExternalLink className="ml-2 h-4 w-4" />
+                    </Button>
+                  </a>
+                </CardContent>
+              </Card>
 
-          {/* Contact Form */}
-          <Card className="shadow-xl">
-            <CardHeader>
-              <CardTitle className="text-2xl">Schreib uns eine Nachricht</CardTitle>
-              <CardDescription>
-                Fülle das Formular aus und wir werden uns so schnell wie möglich bei dir melden.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-semibold mb-2">
-                    Name
-                  </label>
-                  <Input
-                    id="name"
-                    name="name"
-                    type="text"
-                    placeholder="Discord username"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full"
-                  />
-                </div>
+              {/* Info Card */}
+              <Card className="bg-gradient-to-br from-iris-gray-dark to-iris-black border-iris-red/30 shadow-2xl">
+                <CardContent className="p-8 text-white">
+                  <div className="inline-block p-4 bg-iris-red rounded-full mb-4">
+                    <AlertCircle className="h-8 w-8" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-3">Hinweise</h3>
+                  <ul className="space-y-3 text-gray-300">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="h-5 w-5 text-iris-red flex-shrink-0 mt-0.5" />
+                      <span>Halte dich an die Discord-Regeln</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="h-5 w-5 text-iris-red flex-shrink-0 mt-0.5" />
+                      <span>Für anonyme Nachrichten nutze "Anonym" als Namen</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="h-5 w-5 text-iris-red flex-shrink-0 mt-0.5" />
+                      <span>Wir antworten so schnell wie möglich</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
 
-                <div>
-                  <label htmlFor="message" className="block text-sm font-semibold mb-2">
-                    Nachricht
-                  </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    placeholder="Deine Nachricht..."
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    className="w-full min-h-[200px]"
-                  />
-                </div>
-
-                {submitStatus === 'error' && (
-                  <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-                    <p className="text-red-800 dark:text-red-300">
-                      Es gab ein Problem beim Senden deiner Nachricht. Bitte versuche es später erneut.
+            {/* Contact Form */}
+            <div className="lg:col-span-2">
+              <Card className="bg-gradient-to-br from-iris-gray-dark to-iris-black border-iris-red/30 shadow-2xl">
+                <CardContent className="p-12">
+                  <div className="mb-8">
+                    <h2 className="text-4xl font-bold text-white mb-3">
+                      Schreib uns eine Nachricht
+                    </h2>
+                    <p className="text-gray-300 text-lg">
+                      Fülle das Formular aus und wir melden uns bei dir
                     </p>
                   </div>
-                )}
 
-                <Button 
-                  type="submit" 
-                  size="lg" 
-                  className="w-full"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                      Wird gesendet...
-                    </>
-                  ) : (
-                    '📧 Nachricht abschicken'
+                  {submitStatus === 'success' && (
+                    <div className="mb-8 p-6 bg-green-500/20 border-2 border-green-500 rounded-xl flex items-start gap-4">
+                      <CheckCircle className="h-6 w-6 text-green-400 flex-shrink-0 mt-1" />
+                      <div>
+                        <h4 className="text-white font-bold text-lg mb-1">Nachricht gesendet!</h4>
+                        <p className="text-green-200">
+                          Vielen Dank für deine Nachricht. Wir werden uns so schnell wie möglich bei dir melden.
+                        </p>
+                      </div>
+                    </div>
                   )}
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
 
-          {/* Additional Info */}
-          <div className="mt-8 text-center">
-            <p className="text-gray-600 dark:text-gray-300">
-              Du kannst uns auch direkt auf{' '}
-              <a 
-                href="https://discord.gg/R7befRbN7G" 
-                className="text-iris-red hover:text-iris-red-dark font-semibold transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Discord
-              </a>
-              {' '}erreichen.
-            </p>
+                  {submitStatus === 'error' && (
+                    <div className="mb-8 p-6 bg-red-500/20 border-2 border-red-500 rounded-xl flex items-start gap-4">
+                      <AlertCircle className="h-6 w-6 text-red-400 flex-shrink-0 mt-1" />
+                      <div>
+                        <h4 className="text-white font-bold text-lg mb-1">Fehler!</h4>
+                        <p className="text-red-200">
+                          Es gab ein Problem beim Senden deiner Nachricht. Bitte versuche es später erneut oder kontaktiere uns auf Discord.
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  <form onSubmit={handleSubmit} className="space-y-8">
+                    <div>
+                      <label htmlFor="name" className="block text-white text-lg font-semibold mb-3">
+                        Name / Discord Username
+                      </label>
+                      <Input
+                        id="name"
+                        name="name"
+                        type="text"
+                        placeholder="Dein Name oder Discord Username"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        className="w-full h-14 text-lg bg-iris-black border-iris-gray-light text-white placeholder:text-gray-500 focus:border-iris-red focus:ring-iris-red"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="message" className="block text-white text-lg font-semibold mb-3">
+                        Deine Nachricht
+                      </label>
+                      <Textarea
+                        id="message"
+                        name="message"
+                        placeholder="Erzähl uns, wie wir dir helfen können..."
+                        value={formData.message}
+                        onChange={handleChange}
+                        required
+                        rows={8}
+                        className="w-full text-lg bg-iris-black border-iris-gray-light text-white placeholder:text-gray-500 focus:border-iris-red focus:ring-iris-red resize-none"
+                      />
+                    </div>
+
+                    <Button 
+                      type="submit" 
+                      size="lg" 
+                      className="w-full h-16 text-xl font-bold bg-iris-red hover:bg-iris-red-dark transform hover:scale-105 transition-all shadow-2xl hover:shadow-iris-red/60"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="mr-3 h-6 w-6 animate-spin rounded-full border-3 border-white border-t-transparent" />
+                          Wird gesendet...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="mr-3 h-6 w-6" />
+                          Nachricht abschicken
+                        </>
+                      )}
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </div>

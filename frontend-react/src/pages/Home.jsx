@@ -1,149 +1,262 @@
 import { Link } from 'react-router-dom'
 import { Button } from '../components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
+import { Card, CardContent } from '../components/ui/card'
+import { ArrowRight, Users, Stethoscope, Package, Ship, Wrench, Target } from 'lucide-react'
 
 export default function Home() {
   const features = [
     {
       title: 'Joint Forces',
       description: 'Wir machen alle zwei Monate mindestens ein Joint Forces Training um die Zusammenarbeit im Team zu stärken.',
-      image: '/Pictures/polaris_closeup.jpg'
+      image: '/Pictures/polaris_closeup.jpg',
+      icon: Users
     },
     {
       title: 'Medical',
       description: 'Von Erstversorgung bis Lazarett - unser Medic-Team sorgt für realistische Einsätze.',
-      image: '/Pictures/medic_pic.jpg'
+      image: '/Pictures/medic_pic.jpg',
+      icon: Stethoscope
     },
     {
       title: 'Logistik',
       description: 'Ob Nachladen von Torpedos oder auch Belieferung von Rohstoffen, unsere Logistik Truppe macht\'s.',
-      image: '/Pictures/starlancer_logistik.jpg'
+      image: '/Pictures/starlancer_logistik.jpg',
+      icon: Package
     }
   ]
 
-  const sections = [
+  const capabilities = [
     {
       title: 'Multicrew',
       description: 'Wir führen regelmäßige Trainingseinheiten auf den großen Schiffen durch, um eine effektive Mannschaft zu erhalten, damit wir auch in größeren Gefechten bestehen können.',
       image: '/Pictures/ships_multicrew.jpg',
-      reverse: false
+      icon: Ship
     },
     {
       title: 'Salvage',
       description: 'Damit wir unsere finanzielle Unabhängigkeit behalten können, sind wir durchgehend mit unserer Flotte an Salvageschiffen unterwegs, um Credits zu verdienen.',
       image: '/Pictures/reclaimer_salvage.png',
-      reverse: true
+      icon: Wrench
     },
     {
       title: 'FPS',
       description: 'Einer unserer Schwerpunkte im Spiel. Wir arbeiten als effektive Bodentruppe mit anderen Truppenteilen zusammen, um unser Ziel zu erreichen.',
       image: '/Pictures/sillouets_fps.jpg',
-      reverse: false
+      icon: Target
     }
   ]
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-iris-black via-iris-gray to-iris-black py-20 md:py-32">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(220,20,60,0.15),transparent_70%)]" />
-        <div className="container relative mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-in drop-shadow-[0_0_30px_rgba(220,20,60,0.5)]">
-            Willkommen bei I.R.I.S.
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-iris-black dark:via-iris-gray-dark dark:to-iris-black">
+      {/* Hero Section - Fullscreen with Background */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/Pictures/ships_multicrew.jpg" 
+            alt="I.R.I.S. Hero" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-iris-black/90 via-iris-black/80 to-iris-black/90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-iris-red/20 via-transparent to-iris-red/20" />
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 container mx-auto px-4 text-center">
+          <div className="mb-8 inline-block">
+            <img 
+              src="/Pictures/IRIS_logo.png" 
+              alt="I.R.I.S. Logo" 
+              className="h-32 w-32 mx-auto drop-shadow-[0_0_50px_rgba(220,20,60,0.8)] animate-pulse"
+            />
+          </div>
+          <h1 className="text-6xl md:text-8xl font-black text-white mb-6 tracking-tight">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-iris-red-light to-white">
+              I.R.I.S.
+            </span>
           </h1>
-          <p className="text-xl text-gray-300 mb-8">
-            Unser{' '}
+          <p className="text-2xl md:text-3xl text-gray-200 mb-4 font-light">
+            Deutschsprachige Star Citizen Organisation
+          </p>
+          <p className="text-lg text-gray-300 mb-12 max-w-2xl mx-auto">
+            Bodenkampf • Logistik • Luftbereich • Salvage
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <Link to="/blog">
+              <Button size="lg" className="text-xl px-12 py-8 rounded-full shadow-2xl hover:shadow-iris-red/80 transition-all transform hover:scale-105 bg-iris-red hover:bg-iris-red-dark">
+                Unser Blog <ArrowRight className="ml-2" />
+              </Button>
+            </Link>
             <a 
               href="https://discord.gg/R7befRbN7G" 
-              className="text-iris-red-light hover:text-white transition-colors font-semibold"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Discord
+              <Button size="lg" variant="outline" className="text-xl px-12 py-8 rounded-full text-white border-3 border-white hover:bg-white hover:text-iris-black transition-all transform hover:scale-105">
+                Join Discord
+              </Button>
             </a>
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link to="/blog">
-              <Button size="lg" className="text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-iris-red/50 transition-all">
-                Unser Blog
-              </Button>
-            </Link>
-            <Link to="/contact">
-              <Button size="lg" variant="outline" className="text-lg px-8 py-6 rounded-full text-white border-2 border-white hover:bg-white hover:text-iris-black">
-                Kontakt
-              </Button>
-            </Link>
           </div>
-        </div>
-      </section>
 
-      {/* Features Grid */}
-      <section className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <Card 
-              key={index} 
-              className="overflow-hidden border-2 border-transparent hover:border-iris-red transition-all duration-300 hover:shadow-lg hover:shadow-iris-red/20 hover:-translate-y-2 cursor-pointer group"
-            >
-              <div className="relative h-56 overflow-hidden">
-                <img 
-                  src={feature.image} 
-                  alt={feature.title}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-iris-black/60 to-transparent" />
-              </div>
-              <CardHeader>
-                <CardTitle className="text-iris-red">{feature.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base">
-                  {feature.description}
-                </CardDescription>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* Detail Sections */}
-      {sections.map((section, index) => (
-        <section 
-          key={index} 
-          className={`py-16 ${index % 2 === 1 ? 'bg-gradient-to-br from-gray-50 to-white dark:from-iris-gray-dark dark:to-iris-black' : ''}`}
-        >
-          <div className="container mx-auto px-4">
-            <div className={`grid grid-cols-1 md:grid-cols-2 gap-12 items-center ${section.reverse ? 'md:flex-row-reverse' : ''}`}>
-              <div className={`${section.reverse ? 'md:order-2' : ''}`}>
-                <h2 className="text-3xl md:text-4xl font-bold text-iris-red mb-6 border-l-4 border-iris-red pl-4">
-                  {section.title}
-                </h2>
-                <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                  {section.description}
-                </p>
-              </div>
-              <div className={`${section.reverse ? 'md:order-1' : ''}`}>
-                <div className="relative rounded-xl overflow-hidden shadow-2xl hover:shadow-iris-red/30 transition-shadow group">
-                  <img 
-                    src={section.image} 
-                    alt={section.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-br from-iris-red/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
-              </div>
+          {/* Scroll Indicator */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div className="w-8 h-12 border-2 border-white rounded-full flex justify-center pt-2">
+              <div className="w-1 h-3 bg-white rounded-full"></div>
             </div>
           </div>
-        </section>
-      ))}
+        </div>
+      </section>
 
-      {/* Floating Contact Button */}
-      <Link to="/contact">
-        <Button 
-          size="lg" 
-          className="fixed bottom-8 right-8 rounded-full shadow-2xl hover:shadow-iris-red/60 transition-all z-40 px-6 py-6"
-        >
-          💬 Kontakt
-        </Button>
-      </Link>
+      {/* Stats Section */}
+      <section className="py-16 bg-iris-black text-white">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div className="p-8">
+              <div className="text-5xl font-bold text-iris-red mb-2">3+</div>
+              <div className="text-xl text-gray-300">Spezialisierungen</div>
+            </div>
+            <div className="p-8">
+              <div className="text-5xl font-bold text-iris-red mb-2">24/7</div>
+              <div className="text-xl text-gray-300">Aktive Community</div>
+            </div>
+            <div className="p-8">
+              <div className="text-5xl font-bold text-iris-red mb-2">100%</div>
+              <div className="text-xl text-gray-300">Teamwork</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section - Card Grid */}
+      <section className="py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold text-iris-red mb-4">Unsere Stärken</h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Von taktischen Einsätzen bis hin zu komplexen Operationen - wir sind für jede Herausforderung bereit.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {features.map((feature, index) => {
+              const Icon = feature.icon
+              return (
+                <Card 
+                  key={index} 
+                  className="group relative overflow-hidden border-0 shadow-2xl hover:shadow-iris-red/30 transition-all duration-500 transform hover:-translate-y-4"
+                >
+                  {/* Background Image */}
+                  <div className="absolute inset-0 z-0">
+                    <img 
+                      src={feature.image} 
+                      alt={feature.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-iris-black via-iris-black/80 to-iris-black/40" />
+                  </div>
+
+                  {/* Content */}
+                  <CardContent className="relative z-10 p-8 h-80 flex flex-col justify-end text-white">
+                    <div className="mb-4 inline-block p-4 bg-iris-red rounded-full w-fit">
+                      <Icon className="h-8 w-8" />
+                    </div>
+                    <h3 className="text-3xl font-bold mb-3">{feature.title}</h3>
+                    <p className="text-gray-200 leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Capabilities Section - Full Width Cards */}
+      <section className="py-24 bg-white dark:bg-iris-gray-dark">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold text-iris-red mb-4">Unsere Fähigkeiten</h2>
+          </div>
+
+          <div className="space-y-8">
+            {capabilities.map((capability, index) => {
+              const Icon = capability.icon
+              const isEven = index % 2 === 0
+              return (
+                <div 
+                  key={index}
+                  className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center bg-gradient-to-br from-iris-gray-dark to-iris-black rounded-3xl overflow-hidden shadow-2xl hover:shadow-iris-red/40 transition-all duration-500 p-8 md:p-12`}
+                >
+                  {/* Image Side */}
+                  <div className="w-full md:w-1/2">
+                    <div className="relative rounded-2xl overflow-hidden shadow-xl group">
+                      <img 
+                        src={capability.image} 
+                        alt={capability.title}
+                        className="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-br from-iris-red/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    </div>
+                  </div>
+
+                  {/* Content Side */}
+                  <div className="w-full md:w-1/2 text-white">
+                    <div className="inline-block p-4 bg-iris-red rounded-full mb-6">
+                      <Icon className="h-10 w-10" />
+                    </div>
+                    <h3 className="text-4xl font-bold mb-6">{capability.title}</h3>
+                    <p className="text-xl text-gray-300 leading-relaxed mb-8">
+                      {capability.description}
+                    </p>
+                    <Link to="/contact">
+                      <Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-iris-black">
+                        Mehr erfahren <ArrowRight className="ml-2" />
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-32 bg-gradient-to-br from-iris-red via-iris-red-dark to-iris-black text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <img 
+            src="/Pictures/polaris_closeup.jpg" 
+            alt="Background" 
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6">
+            Bereit, Teil von I.R.I.S. zu werden?
+          </h2>
+          <p className="text-2xl mb-12 max-w-3xl mx-auto text-gray-100">
+            Schließe dich unserer Community an und erlebe Star Citizen auf einem neuen Level.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <Link to="/contact">
+              <Button size="lg" className="text-xl px-12 py-8 bg-white text-iris-black hover:bg-gray-100 rounded-full shadow-2xl transform hover:scale-105 transition-all">
+                Kontaktiere uns
+              </Button>
+            </Link>
+            <a 
+              href="https://discord.gg/R7befRbN7G" 
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button size="lg" variant="outline" className="text-xl px-12 py-8 border-white text-white hover:bg-white hover:text-iris-black rounded-full transform hover:scale-105 transition-all">
+                Discord beitreten
+              </Button>
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

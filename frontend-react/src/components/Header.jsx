@@ -1,55 +1,73 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Menu, X, Moon, Sun } from 'lucide-react'
+import { Menu, X, Moon, Sun, Home, Newspaper, Mail, LogIn } from 'lucide-react'
 import { Button } from './ui/button'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(true)
 
   const toggleTheme = () => {
     setIsDark(!isDark)
     document.documentElement.classList.toggle('dark')
   }
 
+  const navLinks = [
+    { to: '/', label: 'Home', icon: Home },
+    { to: '/blog', label: 'Blog', icon: Newspaper },
+    { to: '/contact', label: 'Kontakt', icon: Mail },
+    { to: '/login', label: 'Login', icon: LogIn },
+  ]
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-iris-red bg-gradient-to-r from-iris-black to-iris-gray-dark backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-iris-black/95 backdrop-blur-lg border-b-2 border-iris-red shadow-2xl">
       <div className="container mx-auto px-4">
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-            <img 
-              src="/Pictures/IRIS_logo.png" 
-              alt="I.R.I.S. Logo" 
-              className="h-14 w-14 drop-shadow-[0_0_10px_rgba(220,20,60,0.5)]"
-            />
-            <span className="text-2xl font-bold text-white drop-shadow-lg">
-              I.R.I.S.
-            </span>
+          <Link 
+            to="/" 
+            className="flex items-center space-x-3 hover:opacity-80 transition-all duration-300 transform hover:scale-105"
+          >
+            <div className="relative">
+              <img 
+                src="/Pictures/IRIS_logo.png" 
+                alt="I.R.I.S. Logo" 
+                className="h-12 w-12 drop-shadow-[0_0_15px_rgba(220,20,60,0.8)]"
+              />
+              <div className="absolute inset-0 bg-iris-red rounded-full blur-xl opacity-30 animate-pulse"></div>
+            </div>
+            <div>
+              <span className="text-2xl font-black text-white tracking-tight block">
+                I.R.I.S.
+              </span>
+              <span className="text-xs text-iris-red font-semibold tracking-wider">
+                ORGANIZATION
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-4">
-            <Link to="/blog">
-              <Button variant="outline" className="text-white border-iris-red">
-                📰 Blog
-              </Button>
-            </Link>
-            <Link to="/contact">
-              <Button variant="outline" className="text-white border-iris-red">
-                ✉️ Contact
-              </Button>
-            </Link>
-            <Link to="/login">
-              <Button variant="default">
-                🔐 Login
-              </Button>
-            </Link>
+          <nav className="hidden md:flex items-center space-x-2">
+            {navLinks.map((link) => {
+              const Icon = link.icon
+              return (
+                <Link key={link.to} to={link.to}>
+                  <Button 
+                    variant="ghost" 
+                    className="text-white hover:bg-iris-red hover:text-white transition-all duration-300 flex items-center gap-2"
+                  >
+                    <Icon className="h-4 w-4" />
+                    {link.label}
+                  </Button>
+                </Link>
+              )
+            })}
             <Button 
               variant="ghost" 
               size="icon" 
               onClick={toggleTheme}
-              className="text-white hover:bg-iris-gray-light"
+              className="text-white hover:bg-iris-red transition-all duration-300 ml-2"
+              title="Toggle theme"
             >
               {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
@@ -57,38 +75,59 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white p-2"
+            className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-lg bg-iris-red hover:bg-iris-red-dark transition-all duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
-            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {isMenuOpen ? (
+              <X size={24} className="text-white" />
+            ) : (
+              <Menu size={24} className="text-white" />
+            )}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <nav className="md:hidden py-4 space-y-2 border-t border-iris-red">
-            <Link to="/blog" onClick={() => setIsMenuOpen(false)}>
-              <Button variant="ghost" className="w-full justify-start text-white">
-                📰 Blog
-              </Button>
-            </Link>
-            <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
-              <Button variant="ghost" className="w-full justify-start text-white">
-                ✉️ Contact
-              </Button>
-            </Link>
-            <Link to="/login" onClick={() => setIsMenuOpen(false)}>
-              <Button variant="default" className="w-full">
-                🔐 Login
-              </Button>
-            </Link>
+          <nav className="md:hidden py-6 space-y-3 border-t-2 border-iris-red/30 animate-in slide-in-from-top-5">
+            {navLinks.map((link) => {
+              const Icon = link.icon
+              return (
+                <Link 
+                  key={link.to}
+                  to={link.to} 
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block"
+                >
+                  <Button 
+                    variant="ghost" 
+                    className="w-full justify-start text-white hover:bg-iris-red hover:text-white transition-all duration-300 text-lg py-6 flex items-center gap-3"
+                  >
+                    <Icon className="h-5 w-5" />
+                    {link.label}
+                  </Button>
+                </Link>
+              )
+            })}
             <Button 
               variant="ghost" 
-              onClick={toggleTheme}
-              className="w-full justify-start text-white"
+              onClick={() => {
+                toggleTheme()
+                setIsMenuOpen(false)
+              }}
+              className="w-full justify-start text-white hover:bg-iris-red transition-all duration-300 text-lg py-6 flex items-center gap-3"
             >
-              {isDark ? '☀️ Light Mode' : '🌙 Dark Mode'}
+              {isDark ? (
+                <>
+                  <Sun className="h-5 w-5" />
+                  Light Mode
+                </>
+              ) : (
+                <>
+                  <Moon className="h-5 w-5" />
+                  Dark Mode
+                </>
+              )}
             </Button>
           </nav>
         )}
