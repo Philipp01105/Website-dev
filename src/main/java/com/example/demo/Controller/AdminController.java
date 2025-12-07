@@ -89,13 +89,19 @@ public class AdminController {
 /*---------------------------------Post Methods---------------------------------*/
 
     @PostMapping("/add-blog")
-    public ModelAndView addSection(@RequestParam("title") String title, @RequestParam("content") String content) {
+    public ModelAndView addSection(
+            @RequestParam("title") String title, 
+            @RequestParam("content") String content,
+            @RequestParam(value = "imageUrl", required = false) String imageUrl) {
         Blog section = new Blog();
         section.setTitle(title);
         MarkdownConverter markdownConverter = new MarkdownConverter();
         content = markdownConverter.convertToHtml(content);
         section.setContent(content);
         section.setTimestamp(LocalDateTime.now());
+        if (imageUrl != null && !imageUrl.trim().isEmpty()) {
+            section.setImageUrl(imageUrl.trim());
+        }
         blogRepository.save(section);
         return new ModelAndView("redirect:/admin/");
     }

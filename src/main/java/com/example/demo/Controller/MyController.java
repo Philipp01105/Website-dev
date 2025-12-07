@@ -39,6 +39,16 @@ public class MyController {
         return secureSiteGet(model, "blog", "blogs", blogRepository, Blog.class);
     }
 
+    @GetMapping("/api/blogs")
+    @ResponseBody
+    public ResponseEntity<?> getBlogs() {
+        try {
+            return ResponseEntity.ok(blogRepository.findAll());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error fetching blogs");
+        }
+    }
+
     @GetMapping("/wiki")
     public ModelAndView Wiki(Model model) {
         return secureSiteGet(model, "wiki", "wikis", wikiRepository, Wiki.class);

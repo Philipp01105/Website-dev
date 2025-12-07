@@ -16,6 +16,7 @@ public class Blog implements Timestamped {
     private String title;
     private String content;
     private LocalDateTime timestamp;
+    private String imageUrl;
 
     // Getters and setters for all fields
     public Long getId() {
@@ -48,5 +49,13 @@ public class Blog implements Timestamped {
 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
