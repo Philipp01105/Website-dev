@@ -13,6 +13,9 @@ export default defineConfig({
   server: {
     port: 3000,
     proxy: {
+      // IMPORTANT: Ensure Spring Boot is running on port 8080
+      // If your Spring Boot runs on a different port (e.g., 8081),
+      // update all target URLs below to match
       '/api': {
         target: 'http://localhost:8080',
         changeOrigin: true,

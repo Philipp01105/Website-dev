@@ -1,0 +1,36 @@
+# Spring Boot Application Configuration Example
+# Copy this file to application.properties and configure for your environment
+
+# Server Port (default: 8080)
+# The React dev server proxy expects Spring Boot on port 8080
+# If you change this, also update frontend-react/vite.config.js proxy settings
+server.port=8080
+
+# Database Configuration
+# For development with H2 (in-memory database)
+#spring.datasource.url=jdbc:h2:mem:testdb
+#spring.datasource.driverClassName=org.h2.Driver
+#spring.datasource.username=sa
+#spring.datasource.password=
+
+# For production with PostgreSQL
+#spring.datasource.url=jdbc:postgresql://localhost:5432/your_database
+#spring.datasource.username=your_username
+#spring.datasource.password=your_password
+#spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+# JPA/Hibernate
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=false
+
+# H2 Console (for development only)
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+
+# Logging
+logging.level.root=INFO
+logging.level.com.example.demo=DEBUG
+
+# DevTools
+spring.devtools.restart.enabled=true
+spring.devtools.livereload.enabled=true

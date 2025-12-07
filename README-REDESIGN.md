@@ -82,19 +82,34 @@ This redesign includes a modern React frontend with Shadcn UI components and Tai
 - Java 17 or higher
 - Node.js 18 or higher
 - npm or yarn
+- PostgreSQL (for production) or H2 (for development)
 
 ### Development Setup
 
-#### 1. Start the Spring Boot Backend
+#### 1. Configure Application Properties
+
+Create `src/main/resources/application.properties` from the example:
+
+```bash
+# Copy the example file
+cp src/main/resources/application.properties.example src/main/resources/application.properties
+
+# Edit the file to configure your database and settings
+# IMPORTANT: Ensure server.port=8080 (default) for React dev server proxy to work
+```
+
+**Important:** The React dev server is configured to proxy requests to `http://localhost:8080`. If you change the Spring Boot port in `application.properties`, you must also update the proxy configuration in `frontend-react/vite.config.js`.
+
+#### 2. Start the Spring Boot Backend
 
 ```bash
 # From project root
 ./mvnw spring-boot:run
 ```
 
-The backend will start on `http://localhost:8080`
+The backend will start on `http://localhost:8080` (or the port configured in application.properties)
 
-#### 2. Start the React Frontend (Development Mode)
+#### 3. Start the React Frontend (Development Mode)
 
 ```bash
 # Navigate to frontend directory
@@ -108,6 +123,10 @@ npm run dev
 ```
 
 The frontend dev server will start on `http://localhost:3000` and proxy API requests to the backend.
+
+**Troubleshooting:** If you see proxy errors like "ECONNREFUSED", ensure:
+1. Spring Boot is running on port 8080 (check application.properties)
+2. If using a different port, update the proxy target in `frontend-react/vite.config.js`
 
 ### Production Build
 
@@ -206,6 +225,57 @@ Potential improvements:
 
 ## Troubleshooting
 
+### Proxy Connection Errors (ECONNREFUSED)
+
+**Symptoms:**
+- React dev server shows errors like: `http proxy error: /Pictures/IRIS_logo.png AggregateError [ECONNREFUSED]`
+- Images and API calls fail to load
+- Console shows "Failed to fetch" errors
+
+**Solution:**
+1. **Check Spring Boot port:** Verify Spring Boot is running on port 8080
+   ```bash
+   # Check application.properties
+   cat src/main/resources/application.properties | grep server.port
+   ```
+
+2. **If using a different port (e.g., 8081):**
+   
+   Option A - Change Spring Boot to use port 8080 (recommended):
+   ```properties
+   # In application.properties
+   server.port=8080
+   ```
+   
+   Option B - Update Vite proxy configuration:
+   ```javascript
+   // In frontend-react/vite.config.js
+   // Change all proxy targets from 'http://localhost:8080' to 'http://localhost:8081'
+   server: {
+     proxy: {
+       '/api': {
+         target: 'http://localhost:8081',  // Update this
+         changeOrigin: true,
+       },
+       // Update other proxy entries similarly
+     }
+   }
+   ```
+
+3. **Restart both servers** after making changes
+
+### Design Not Loading
+
+**Symptoms:**
+- React app loads but styles are missing
+- White screen or unstyled content
+
+**Solution:**
+1. Ensure Spring Boot is running before starting React dev server
+2. Check browser console for 404 errors
+3. Clear browser cache and hard reload (Ctrl+Shift+R)
+4. Verify build was successful: `cd frontend-react && npm run build`
+
 ### Frontend Build Issues
 ```bash
 cd frontend-react
@@ -222,7 +292,7 @@ npm run build
 ### Port Already in Use
 Change ports in:
 - `application.properties` (Spring Boot)
-- `vite.config.js` (React dev server)
+- `vite.config.js` (React dev server - update both port and proxy target)
 
 ## Contributing
 
