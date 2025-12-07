@@ -1,34 +1,33 @@
 <th:block th:fragment="header(title)">
     <div class="nav-container">
         <a th:href="@{/}" class="logo-title">
-            <img th:src="@{/Pictures/IRIS_logo.png}" alt="Logo" class="logo">
-            <div class="header-text">
-                <p th:text="${title} ?: 'I.R.I.S.'"></p>
-            </div>
+            <img th:src="@{/Pictures/IRIS_logo.png}" alt="I.R.I.S. Logo" class="logo">
+            <span class="header-text" th:text="${title} ?: 'I.R.I.S.'">I.R.I.S.</span>
         </a>
-        <div class="nav-buttons">
-            <div th:if="${!isLoggedIn}">
-                <a th:href="@{/login-real}" class="button">Login</a>
-            </div>
-            <div th:if="${isLoggedIn} and ${role.contains('ADMIN')}">
-                <a th:href="@{/admin/}" class="button">Admin Panel</a>
-            </div>
-            <div th:if="${isLoggedIn}">
-                <form th:action="@{/logout}" method="post">
-                    <button type="submit" class="button">Logout</button>
-                </form>
-            </div>
-            <div>
-                <a th:href="@{/blog}" class="button">Blog</a>
-            </div>
-            <div th:if="${isLoggedIn} and ${role.contains('ADMIN')}">
-                <a th:href="@{/wiki}" class="button">Wiki</a>
-            </div>
-            <div>
-                <button id="theme-toggle" class="button">
-                    <span>🌙</span>
-                </button>
-            </div>
+        
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <div class="nav-buttons" id="nav-menu">
+            <a th:href="@{/blog}" class="button">📰 Blog</a>
+            
+            <a th:if="${isLoggedIn} and ${role.contains('ADMIN')}" 
+               th:href="@{/wiki}" class="button">📚 Wiki</a>
+            
+            <a th:if="${!isLoggedIn}" 
+               th:href="@{/login-real}" class="button">🔐 Login</a>
+            
+            <a th:if="${isLoggedIn} and ${role.contains('ADMIN')}" 
+               th:href="@{/admin/}" class="button">🛡️ Admin Panel</a>
+            
+            <form th:if="${isLoggedIn}" th:action="@{/logout}" method="post" style="display: inline; margin: 0;">
+                <button type="submit" class="button">🚪 Logout</button>
+            </form>
+            
+            <button id="theme-toggle" class="button">🌙</button>
         </div>
     </div>
 </th:block>
