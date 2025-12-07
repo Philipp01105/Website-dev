@@ -1,16 +1,79 @@
-# React + Vite
+# I.R.I.S. Website - React Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Modern, completely redesigned frontend for the I.R.I.S. Star Citizen organization website.
 
-Currently, two official plugins are available:
+## 🎨 Complete Redesign
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This is a **total visual overhaul** featuring:
+- **Bold, modern layout** completely different from the original
+- **Fullscreen hero sections** with immersive background images
+- **Card-based masonry grids** for dynamic, Pinterest-style layouts
+- **Professional animations** and smooth transitions
+- **Dark theme by default** with organization colors (Crimson Red & Black)
+- **Fixed navigation header** with blur effects
+- **Self-contained architecture** - all assets in frontend directory
 
-## React Compiler
+## 📁 Self-Contained Structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```
+frontend-react/
+├── public/
+│   └── Pictures/          # All organization images
+├── src/
+│   ├── components/ui/     # Shadcn UI components
+│   ├── pages/             # All page components
+│   └── App.jsx            # Main layout
+├── dist/                  # Build output
+└── vite.config.js         # Configuration
+```
 
-## Expanding the ESLint configuration
+## 🚀 Quick Start
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+# Install dependencies
+npm install
+
+# Development server
+npm run dev
+# http://localhost:3000
+
+# Production build
+npm run build
+# Output in ./dist/
+```
+
+## 🎯 Key Features
+
+### Home Page
+- Fullscreen hero with animated logo
+- Statistics showcase
+- Feature cards with icons
+- Full-width capability sections
+- Bold CTA
+
+### Blog Page
+- Masonry grid layout
+- Variable card sizes
+- Modal view
+- Hover effects
+
+### Contact Page
+- Split layout
+- Discord card
+- Large form
+- Animations
+
+## 📦 Deployment
+
+**Self-contained frontend:**
+1. Standalone: Deploy `dist/` to Vercel/Netlify
+2. With Spring Boot: Copy `dist/` to `static/`
+3. Separate: Frontend CDN + Backend API
+
+## 🛠️ Tech Stack
+
+- React 19 + Vite 7
+- Tailwind CSS 3
+- Shadcn UI
+- Lucide Icons
+- React Router
